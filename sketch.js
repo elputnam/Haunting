@@ -8,6 +8,8 @@ let wine;
 let carDad;
 let carEL;
 let colour = 4;
+//let inc = 3;
+
 
 let bars = [];
 
@@ -26,7 +28,7 @@ function setup() {
   colorMode(HSB, 360, 100, 100, 100);
   frameRate(8);
   for (let i=0; i < 30; i++){
-    bars[i] = new Bar(0, random(height), random(20));
+    bars[i] = new Bar(0, random(height), random(20), random(-7, 7));
   }
 
 }
@@ -75,19 +77,23 @@ function draw() {
 }
 
 class Bar{
-  constructor(x, y, r){
+  constructor(x, y, r, inc){
     this.x = x;
     this.y = y;
     this.r = r;
+    this.inc = inc;
   }
 
   edges(){
-    if (this.y > height){
-      this.y = 0;
+    // if (this.y > height){
+    //   this.y = 0;
+    // }
+    if (this.y  < 0 || this.y > height){
+      this.inc*=-1;
     }
   }
   move(){
-    this.y += 5;
+    this.y += this.inc;
   }
 
 
