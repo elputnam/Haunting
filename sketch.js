@@ -84,7 +84,8 @@ function draw() {
   image(EL, 0, 0, width, height);
   pop();
 
-  if (frameCount%int(random(20))==0){
+  //timed changes
+  if (frameCount%int(random(10,20))==0){
     colour = random(360);
     EL.filter(INVERT);
     sat = random(50);
