@@ -28,7 +28,7 @@ function setup() {
   colorMode(HSB, 360, 100, 100, 100);
   frameRate(8);
   for (let i=0; i < 30; i++){
-    bars[i] = new Bar(0, random(height), random(20), random(-7, 7));
+    bars[i] = new Bar(0, random(height), random(30), random(-7, 7));
   }
 
 }
@@ -99,7 +99,7 @@ class Bar{
 
   show(){
     noStroke();
-    fill(0, random(100));
+    fill(0, random(50, 100));
     //fill(colour, random(100), random(100), random(100));
     rect(this.x, this.y, width, this.r);
   }
