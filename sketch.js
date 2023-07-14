@@ -11,7 +11,7 @@ let colour = 180;
 //let inc = 3;
 let sat = 100;
 let lum = 0;
-let grid = 0;
+let grid = 255;
 
 
 let bars1 = [];
