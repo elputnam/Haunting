@@ -7,8 +7,10 @@ let base;
 let wine;
 let carDad;
 let carEL;
-let colour = 4;
+let colour = 180;
 //let inc = 3;
+let sat = 100;
+let lum = 0;
 
 
 let bars1 = [];
@@ -28,11 +30,11 @@ function setup() {
   createCanvas(base.width/2, base.height/2);
   colorMode(HSB, 360, 100, 100, 100);
   frameRate(8);
-  for (let i=0; i < 30; i++){
-    bars1[i] = new Bar1(0, random(height), random(30), random(-7, 7));
+  for (let i=0; i < 10; i++){
+    bars1[i] = new Bar1(0, random(height), random(100), random(-7, 7));
   }
   for (let i=0; i < 30; i++){
-    bars2[i] = new Bar2(random(width), 0, random(30), random(-7, 7));
+    bars2[i] = new Bar2(random(width), 0, random(10), random(-5, 5));
   }
 
 }
@@ -54,21 +56,22 @@ function draw() {
   blend(carEL, 0, 0, carEL.width, carEL.height, 0, 0, width, height, LIGHTEST);
 
   //rolling bars
+  for (let i = 0; i < bars2.length; i++){
+    bars2[i].edges();
+    bars2[i].move();
+    bars2[i].show();
+  }
   for (let i = 0; i < bars1.length; i++){
     bars1[i].edges();
     bars1[i].move();
     bars1[i].show();
   }
 
-  for (let i = 0; i < bars2.length; i++){
-    bars2[i].edges();
-    bars2[i].move();
-    bars2[i].show();
-  }
+  
 
   //dad
   push();
-  tint(180, random(100), 100);
+  tint(colour, sat, 100);
   dad.filter(GRAY);
   image(dad, 0, 0, width, height);
   pop();
@@ -76,13 +79,15 @@ function draw() {
   //EL
   push();
   EL.filter(GRAY);
-  tint(4, 42, random(50));
+  tint(lum);
   image(EL, 0, 0, width, height);
   pop();
 
   if (frameCount%int(random(20))==0){
     colour = random(360);
     EL.filter(INVERT);
+    sat = random(50);
+    lum = random(255);
   }
 }
 
@@ -109,7 +114,7 @@ class Bar1{
 
   show(){
     noStroke();
-    fill(0, random(50, 100));
+    fill(0, 100);
     //fill(colour, random(100), random(100), random(100));
     rect(this.x, this.y, width, this.r);
   }
@@ -138,7 +143,7 @@ class Bar2{
 
   show(){
     noStroke();
-    fill(0, random(50, 100));
+    fill(colour, random(100), random(100), random(50));
     //fill(colour, random(100), random(100), random(100));
     rect(this.x, this.y, this.r, height);
   }
