@@ -11,6 +11,7 @@ let colour = 180;
 //let inc = 3;
 let sat = 100;
 let lum = 0;
+let grid = 0;
 
 
 let bars1 = [];
@@ -33,7 +34,7 @@ function setup() {
   for (let i=0; i < 10; i++){
     bars1[i] = new Bar1(0, random(height), random(100), random(-7, 7));
   }
-  for (let i=0; i < 30; i++){
+  for (let i=0; i < 50; i++){
     bars2[i] = new Bar2(random(width), 0, random(10), random(-5, 5));
   }
 
@@ -88,7 +89,15 @@ function draw() {
     EL.filter(INVERT);
     sat = random(50);
     lum = random(255);
+    if (grid <= 0 ){
+      grid = 255;
+    } else {
+      grid = 0;
+    }
+  
   }
+
+  
 }
 
 class Bar1{
@@ -114,7 +123,7 @@ class Bar1{
 
   show(){
     noStroke();
-    fill(0, 100);
+    fill(grid, 100);
     //fill(colour, random(100), random(100), random(100));
     rect(this.x, this.y, width, this.r);
   }
@@ -143,8 +152,8 @@ class Bar2{
 
   show(){
     noStroke();
-    fill(colour, random(100), random(100), random(50));
-    //fill(colour, random(100), random(100), random(100));
+    fill(grid, 100);
+    //fill(colour, random(100), random(100), random(50));
     rect(this.x, this.y, this.r, height);
   }
 }
