@@ -11,7 +11,8 @@ let colour = 4;
 //let inc = 3;
 
 
-let bars = [];
+let bars1 = [];
+let bars2 = [];
 
 function preload(){
   EL = loadImage('assets/ELDad_LemonCar_EL.png');
@@ -28,7 +29,10 @@ function setup() {
   colorMode(HSB, 360, 100, 100, 100);
   frameRate(8);
   for (let i=0; i < 30; i++){
-    bars[i] = new Bar(0, random(height), random(30), random(-7, 7));
+    bars1[i] = new Bar1(0, random(height), random(30), random(-7, 7));
+  }
+  for (let i=0; i < 30; i++){
+    bars2[i] = new Bar2(random(width), 0, random(30), random(-7, 7));
   }
 
 }
@@ -50,10 +54,16 @@ function draw() {
   blend(carEL, 0, 0, carEL.width, carEL.height, 0, 0, width, height, LIGHTEST);
 
   //rolling bars
-  for (let i = 0; i < bars.length; i++){
-    bars[i].edges();
-    bars[i].move();
-    bars[i].show();
+  for (let i = 0; i < bars1.length; i++){
+    bars1[i].edges();
+    bars1[i].move();
+    bars1[i].show();
+  }
+
+  for (let i = 0; i < bars2.length; i++){
+    bars2[i].edges();
+    bars2[i].move();
+    bars2[i].show();
   }
 
   //dad
@@ -76,7 +86,7 @@ function draw() {
   }
 }
 
-class Bar{
+class Bar1{
   constructor(x, y, r, inc){
     this.x = x;
     this.y = y;
@@ -102,5 +112,34 @@ class Bar{
     fill(0, random(50, 100));
     //fill(colour, random(100), random(100), random(100));
     rect(this.x, this.y, width, this.r);
+  }
+}
+
+class Bar2{
+  constructor(x, y, r, inc){
+    this.x = x;
+    this.y = y;
+    this.r = r;
+    this.inc = inc;
+  }
+
+  edges(){
+    // if (this.y > height){
+    //   this.y = 0;
+    // }
+    if (this.x  < 0 || this.x > width){
+      this.inc*=-1;
+    }
+  }
+  move(){
+    this.x += this.inc;
+  }
+
+
+  show(){
+    noStroke();
+    fill(0, random(50, 100));
+    //fill(colour, random(100), random(100), random(100));
+    rect(this.x, this.y, this.r, height);
   }
 }
